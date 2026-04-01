@@ -1,0 +1,14 @@
+//
+// Created by galvanm on 3/31/2026.
+//
+
+#ifndef SPA4_HUNT_THE_WUMPUS_LEANOSK_GALVANM_ENDERMAN_H
+#define SPA4_HUNT_THE_WUMPUS_LEANOSK_GALVANM_ENDERMAN_H
+#include "Inhibitor.h"
+
+
+class Enderman : public Inhibitor {
+};
+
+
+#endif //SPA4_HUNT_THE_WUMPUS_LEANOSK_GALVANM_ENDERMAN_H

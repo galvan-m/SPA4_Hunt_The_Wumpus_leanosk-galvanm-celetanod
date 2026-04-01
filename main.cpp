@@ -3,11 +3,24 @@
 //
 
 #include <iostream>
+#include "Map.h"
+
 using std::cout;
 using std::cin;
 using std::endl;
 
+void help();
+
+
 int main() {
+    Map* map = new Map();
+
+    help();
+
+    map->printMap();
+}
+
+void help() {
     cout << "Welcome to the Shimmering Mines!\n\n"
     "Here you are an adventurer on a search for some valuable diamonds hidden\n"
     "deep within the mine. Beware for there are dangers in this mine! Creepers\n"
