@@ -3,10 +3,8 @@
 //
 
 #include <typeinfo>
-#include "Map.h"
-
 #include <iostream>
-
+#include "Map.h"
 #include "Player.h"
 #include "Room.h"
 #include "Creeper.h"
