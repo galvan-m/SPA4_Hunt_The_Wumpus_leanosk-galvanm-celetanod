@@ -8,6 +8,9 @@
 
 
 class Item : public Entity{
+    public:
+    virtual ~Item();
+
 };
 
 

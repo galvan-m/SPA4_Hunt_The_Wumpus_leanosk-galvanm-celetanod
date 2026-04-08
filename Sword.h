@@ -8,6 +8,9 @@
 
 
 class Sword : public Item {
+    public:
+    void interact() override;
+    std::string getWarning() const override;
 };
 
 
