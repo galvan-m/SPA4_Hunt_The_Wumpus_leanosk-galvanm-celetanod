@@ -8,6 +8,8 @@
 
 
 class Inhibitor : public Entity {
+    public:
+    virtual bool isFatal() const = 0;
 };
 
 

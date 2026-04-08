@@ -8,6 +8,8 @@
 
 
 class Diamond : public Item {
+    void interact() override;
+    std::string getWarning() const override;
 };
 
 
