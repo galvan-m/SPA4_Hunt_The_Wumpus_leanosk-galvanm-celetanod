@@ -18,6 +18,10 @@ public:
     void addEntity(Entity *entity);
     void printMap();
     void teleportMiner();
+    void moveMiner(char direction);
+    void printWarnings();
+    bool isMinerAlive() const;
+    bool hasMinerWon() const;
 
 private:
     void generate_rooms();

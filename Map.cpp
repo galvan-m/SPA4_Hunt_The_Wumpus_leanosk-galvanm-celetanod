@@ -52,6 +52,7 @@ void Map::addEntity(Entity* entity) {
         }
     }
 }
+
 void Map::generate_rooms() {
     for (int i = 0; i < MAP_HEIGHT; i++) {
         for (int j = 0; j < MAP_WIDTH; j++) {
@@ -71,7 +72,54 @@ void Map::generate_rooms() {
         }
     }
 }
+void Map::moveMiner(char direction) {
+    direction = toupper(direction);
+    bool moved = false;
 
+    if (direction == 'N' && minerRow > 0) {
+        minerRow--;
+        moved = true;
+    } else if (direction == 'S' && minerRow < MAP_HEIGHT - 1) {
+        minerRow++;
+        moved = true;
+    } else if (direction == 'E' && minerCol < MAP_WIDTH - 1) {
+        minerCol++;
+        moved = true;
+    } else if (direction == 'W' && minerCol > 0) {
+        minerCol--;
+        moved = true;
+    } else {
+        cout << "You bumped into a solid rock wall! You cannot go that way." << endl;
+    }
+
+    if (moved) {
+        processCurrentRoom();
+    }
+}
+
+void Map::printWarnings() {
+    Room* currentRoom = &rooms[minerRow][minerCol];
+
+    if (currentRoom->getNorth() != nullptr && currentRoom->getNorth()->getEntity() != nullptr) {
+        cout << currentRoom->getNorth()->getEntity()->getWarning() << endl;
+    }
+    if (currentRoom->getSouth() != nullptr && currentRoom->getSouth()->getEntity() != nullptr) {
+        cout << currentRoom->getSouth()->getEntity()->getWarning() << endl;
+    }
+    if (currentRoom->getEast() != nullptr && currentRoom->getEast()->getEntity() != nullptr) {
+        cout << currentRoom->getEast()->getEntity()->getWarning() << endl;
+    }
+    if (currentRoom->getWest() != nullptr && currentRoom->getWest()->getEntity() != nullptr) {
+        cout << currentRoom->getWest()->getEntity()->getWarning() << endl;
+    }
+}
+bool Map::isMinerAlive() const {
+    return miner.isAlive();
+}
+
+bool Map::hasMinerWon() const {
+    return miner.hasWon();
+}
 void Map::printMap() {
     for (int i = 0; i < MAP_HEIGHT; i++) {
         for (int j = 0; j < MAP_WIDTH; j++) {
@@ -109,6 +157,14 @@ void Map::processCurrentRoom() {
 
         if (dynamic_cast<Enderman*> (entity) != nullptr) {
             teleportMiner();
+        }else if (dynamic_cast<Sword*>(entity) != nullptr) {
+            rooms[minerRow][minerCol].setEntity(nullptr);
+            delete entity;
+        } else if (dynamic_cast<Creeper*>(entity) != nullptr) {
+            if (miner.isAlive()) {
+                rooms[minerRow][minerCol].setEntity(nullptr);
+                delete entity;
+            }
         }
     }
 }

@@ -14,10 +14,32 @@ void help();
 
 int main() {
     Map* map = new Map();
-
     help();
 
-    map->printMap();
+    while (map->isMinerAlive() && !map->hasMinerWon()) {
+        cout << "\n--------------------------------------------------" << endl;
+
+        map->printWarnings();
+
+        cout << "Action: N)orth, S)outh, E)ast, W)est, H)elp, and Q)uit: ";
+        char move;
+        cin >> move;
+
+        if (toupper(move) == 'H') {
+            help();
+        } else if (toupper(move) == 'Q') {
+            cout << "Game Over" << endl;
+            break;
+        } else if (toupper(move) == 'N' || toupper(move) == 'S' || toupper(move) == 'E' || toupper(move) == 'W') {
+            map->moveMiner(move);
+        } else {
+            cout << "Invalid input. Please enter N, S, E, W, or Q." << endl;
+        }
+    }
+
+
+    delete map;
+    return 0;
 }
 
 void help() {
