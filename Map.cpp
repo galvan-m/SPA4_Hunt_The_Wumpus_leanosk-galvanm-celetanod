@@ -125,7 +125,9 @@ void Map::printMap() {
         for (int j = 0; j < MAP_WIDTH; j++) {
             Entity* entity = rooms[i][j].getEntity();
 
-            if (entity == nullptr) {
+            if (i == minerRow && j == minerCol) {
+                cout << "M ";
+            } else if (entity == nullptr) {
                 cout << ". ";
             } else {
                 cout << entity->getDisplayChar() << " ";

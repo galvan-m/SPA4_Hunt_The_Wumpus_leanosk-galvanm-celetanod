@@ -15,6 +15,8 @@ void help();
 int main() {
     Map* map = new Map();
     help();
+    cout << "Enter 'm' to enter debug mode" << endl;
+    bool debug = false;
 
     while (map->isMinerAlive() && !map->hasMinerWon()) {
         cout << "\n--------------------------------------------------" << endl;
@@ -27,6 +29,8 @@ int main() {
 
         if (toupper(move) == 'H') {
             help();
+        } else if (toupper(move) == 'M') {
+            debug = !debug;
         } else if (toupper(move) == 'Q') {
             cout << "Game Over" << endl;
             break;
@@ -34,6 +38,11 @@ int main() {
             map->moveMiner(move);
         } else {
             cout << "Invalid input. Please enter N, S, E, W, or Q." << endl;
+        }
+
+        if (debug) {
+            map->printMap();
+
         }
     }
 
